@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Método de Bisección - Blog de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+    <h1>Método de Bisección</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="taylor.html">Serie de Taylor</a>
+    <a href="biseccion.html">Método de Bisección</a>
+</nav>
+
+<main>
+    <h2>Explicación</h2>
+    <p>El método de bisección es una técnica numérica para encontrar raíces de una función continua f(x) en un intervalo [a, b] donde la función cambia de signo (es decir, f(a)*f(b) &lt; 0).</p>
+    <p>Consiste en dividir repetidamente el intervalo a la mitad y seleccionar el subintervalo donde la función cambia de signo, garantizando la convergencia hacia la raíz.</p>
+
+    <h2>Resolución paso a paso</h2>
+    <p>Supongamos que queremos encontrar la raíz de <code>f(x) = x^3 - x - 2</code> en el intervalo [1, 2].</p>
+    <ol>
+        <li>Calcular el punto medio: <code>m = (a + b)/2</code></li>
+        <li>Evaluar f(m)</li>
+        <li>Determinar en qué subintervalo la función cambia de signo y actualizar <code>a</code> o <code>b</code></li>
+        <li>Repetir hasta alcanzar la tolerancia deseada</li>
+    </ol>
+
+  
+    <h2>Código Python</h2>
+    <pre><code>def f(x):
+    return x**3 - x - 2
+
+def biseccion(a, b, tol):
+    if f(a)*f(b) >= 0:
+        print("No se puede aplicar el método en este intervalo.")
+        return None
+
+    m = (a + b)/2
+    while abs(f(m)) &gt; tol:
+        if f(a)*f(m) &lt; 0:
+            b = m
+        else:
+            a = m
+        m = (a + b)/2
+    return m
+
+raiz = biseccion(1, 2, 0.0001)
+print(f"Raíz aproximada: {raiz}")</code></pre>
+
+    <h2>Bibliografía</h2>
+    <ul>
+        <li>Burden, Richard L., y J. Douglas Faires. <em>Análisis numérico.</em> 9ª edición. Cengage Learning, 2011.</li>
+        <li>Chapra, Steven C. <em>Métodos numéricos para ingenieros.</em> 7ª edición. McGraw-Hill, 2012.</li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2025 Blog de Métodos Numéricos.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Método Serie de Taylor - Blog de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+    <h1>Método Serie de Taylor</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="taylor.html">Serie de Taylor</a>
+    <a href="biseccion.html">Método de Bisección</a>
+</nav>
+
+<main>
+    <h2>Explicación</h2>
+    <p>La serie de Taylor es una representación de una función como una suma infinita de términos calculados a partir de las derivadas de la función en un punto.</p>
+    <p>La fórmula para la serie de Taylor centrada en <code>a</code> es:</p>
+    <p style="text-align:center;"><code>f(x) ≈ Σ<sub>n=0</sub><sup>∞</sup> [f⁽ⁿ⁾(a)/n!] (x - a)ⁿ</code></p>
+
+    <h2>Resolución paso a paso</h2>
+    <p>Ejemplo: Aproximar <code>e^x</code> en <code>x=1</code> usando la serie de Taylor centrada en <code>a=0</code> hasta el término 4.</p>
+    <ol>
+        <li>Calcular derivadas: para <code>e^x</code> todas son <code>e^x</code>, evaluadas en 0 = 1</li>
+        <li>Calcular términos: <code>1 + x + x²/2! + x³/3! + x⁴/4!</code></li>
+        <li>Sustituir <code>x=1</code> y sumar para aproximar</li>
+    </ol>
+
+
+    <h2>Código Python</h2>
+    <pre><code>import math
+import matplotlib.pyplot as plt
+import numpy as np
+
+def taylor_exp(x, a=0, n_terms=5):
+    suma = 0
+    for n in range(n_terms):
+        suma += (math.exp(a) / math.factorial(n)) * (x - a)**n
+    return suma
+
+x = np.linspace(-2, 2, 100)
+y_exacta = np.exp(x)
+y_taylor = [taylor_exp(xi) for xi in x]
+
+plt.plot(x, y_exacta, label="e^x")
+plt.plot(x, y_taylor, label="Serie de Taylor (5 términos)")
+plt.legend()
+plt.grid(True)
+plt.title("Aproximación con Serie de Taylor")
+plt.savefig("img/taylor_plot.png")
+plt.show()</code></pre>
+
+    <h2>Bibliografía</h2>
+    <ul>
+        <li>Burden, Richard L., y J. Douglas Faires. <em>Análisis numérico.</em> 9ª edición. Cengage Learning, 2011.</li>
+        <li>Chapra, Steven C. <em>Métodos numéricos para ingenieros.</em> 7ª edición. McGraw-Hill, 2012.</li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2025 Blog de Métodos Numéricos.</p>
+</footer>
+
+</body>
+</html>

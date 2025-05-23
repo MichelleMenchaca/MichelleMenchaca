@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Interpolación resolviendo Ax=b - Blog de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+    <h1>Interpolación resolviendo Ax=b</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="interpolacion_axb.html">Interpolación Ax=b</a>
+</nav>
+
+<main>
+    <h2>Explicación</h2>
+    <p>La interpolación puede resolverse formulando un sistema lineal donde la matriz contiene potencias de los puntos dados y se resuelve para los coeficientes del polinomio.</p>
+
+    <h2>Resolución paso a paso</h2>
+    <ol>
+        <li>Construir la matriz <code>A</code> donde cada fila es <code>[1, x_i, x_i², ..., x_iⁿ]</code>.</li>
+        <li>Construir el vector <code>b</code> con los valores <code>y_i</code>.</li>
+        <li>Resolver <code>Ax = b</code> para obtener los coeficientes.</li>
+    </ol>
+
+    <h2>Código Python</h2>
+    <pre><code>import numpy as np
+
+def interpolacion_axb(x_points, y_points):
+    n = len(x_points)
+    A = np.vander(x_points, increasing=True)
+    b = np.array(y_points)
+    coef = np.linalg.solve(A, b)
+    return coef
+
+# Ejemplo
+x_points = np.array([1, 2, 3])
+y_points = np.array([2, 3, 5])
+coeficientes = interpolacion_axb(x_points, y_points)
+print(f"Coeficientes del polinomio: {coeficientes}")</code></pre>
+
+    <h2>Bibliografía</h2>
+    <ul>
+        <li>Burden, Richard L., y J. Douglas Faires. <em>Análisis numérico.</em> 9ª edición. Cengage Learning, 2011.</li>
+        <li>Chapra, Steven C. <em>Métodos numéricos para ingenieros.</em> 7ª edición. McGraw-Hill, 2012.</li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2025 Blog de Métodos Numéricos.</p>
+</footer>
+
+</body>
+</html>

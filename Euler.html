@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Método de Euler y Runge-Kutta - Blog de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+    <h1>Método de Euler y Runge-Kutta</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="euler_runge_kutta.html">Euler y Runge-Kutta</a>
+</nav>
+
+<main>
+    <h2>Explicación</h2>
+    <p>Estos métodos numéricos se usan para resolver ecuaciones diferenciales ordinarias aproximando soluciones en puntos discretos.</p>
+
+    <h2>Resolución paso a paso</h2>
+    <h3>Método de Euler</h3>
+    <ol>
+        <li>Partir de condiciones iniciales.</li>
+        <li>Calcular la pendiente y avanzar un paso.</li>
+        <li>Repetir para todo el intervalo.</li>
+    </ol>
+
+    <h3>Método de Runge-Kutta (4º orden)</h3>
+    <ol>
+        <li>Calcular cuatro pendientes ponderadas en cada paso.</li>
+        <li>Combinar las pendientes para obtener el siguiente valor.</li>
+        <li>Es más preciso que Euler para igual tamaño de paso.</li>
+    </ol>
+
+    <h2>Código Python</h2>
+    <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+def f(t, y):
+    return t - y
+
+def euler(f, t0, y0, h, n):
+    t = t0
+    y = y0
+    ts = [t]
+    ys = [y]
+    for _ in range(n):
+        y += h * f(t, y)
+        t += h
+        ts.append(t)
+        ys.append(y)
+    return np.array(ts), np.array(ys)
+
+def runge_kutta4(f, t0, y0, h, n):
+    t = t0
+    y = y0
+    ts = [t]
+    ys = [y]
+    for _ in range(n):
+        k1 = f(t, y)
+        k2 = f(t + h/2, y + h*k1/2)
+        k3 = f(t + h/2, y + h*k2/2)
+        k4 = f(t + h, y + h*k3)
+        y += (h/6)*(k1 + 2*k2 + 2*k3 + k4)
+        t += h
+        ts.append(t)
+        ys.append(y)
+    return np.array(ts), np.array(ys)
+
+t0, y0 = 0, 1
+h = 0.1
+n = 50
+
+ts_euler, ys_euler = euler(f, t0, y0, h, n)
+ts_rk4, ys_rk4 = runge_kutta4(f, t0, y0, h, n)
+
+plt.plot(ts_euler, ys_euler, label="Euler")
+plt.plot(ts_rk4, ys_rk4, label="Runge-Kutta 4")
+plt.legend()
+plt.show()</code></pre>
+
+    <h2>Bibliografía</h2>
+    <ul>
+        <li>Burden, Richard L., y J. Douglas Faires. <em>Análisis numérico.</em> 9ª edición. Cengage Learning, 2011.</li>
+        <li>Chapra, Steven C. <em>Métodos numéricos para ingenieros.</em> 7ª edición. McGraw-Hill, 2012.</li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2025 Blog de Métodos Numéricos.</p>
+</footer>
+
+</body>
+</html>

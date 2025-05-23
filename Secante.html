@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Método de la Secante - Blog de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+    <h1>Método de la Secante</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="taylor.html">Serie de Taylor</a>
+    <a href="biseccion.html">Método de Bisección</a>
+    <a href="secante.html">Método de la Secante</a>
+</nav>
+
+<main>
+    <h2>Explicación</h2>
+    <p>El método de la secante es un método iterativo para encontrar raíces que utiliza dos aproximaciones iniciales y la pendiente de la línea secante para calcular nuevas aproximaciones.</p>
+
+    <h2>Resolución paso a paso</h2>
+    <ol>
+        <li>Elegir dos valores iniciales <code>x₀</code> y <code>x₁</code>.</li>
+        <li>Calcular la siguiente aproximación con la fórmula: <code>xₙ₊₁ = xₙ - f(xₙ)*(xₙ - xₙ₋₁)/(f(xₙ) - f(xₙ₋₁))</code>.</li>
+        <li>Repetir hasta alcanzar la tolerancia deseada.</li>
+    </ol>
+
+    <h2>Código Python</h2>
+    <pre><code>def secante(f, x0, x1, tol=1e-6, max_iter=100):
+    for _ in range(max_iter):
+        fx0 = f(x0)
+        fx1 = f(x1)
+        if fx1 - fx0 == 0:
+            raise ZeroDivisionError("División por cero en secante.")
+        x2 = x1 - fx1 * (x1 - x0) / (fx1 - fx0)
+        if abs(x2 - x1) < tol:
+            return x2
+        x0, x1 = x1, x2
+    return x2
+
+# Ejemplo
+f = lambda x: x**3 - x - 2
+raiz = secante(f, 1, 2)
+print(f"Raíz aproximada: {raiz}")</code></pre>
+
+    <h2>Bibliografía</h2>
+    <ul>
+        <li>Chapra, Steven C. <em>Métodos numéricos para ingenieros.</em> 7ª edición. McGraw-Hill, 2012.</li>
+        <li>Burden, Richard L., y J. Douglas Faires. <em>Análisis numérico.</em> 9ª edición. Cengage Learning, 2011.</li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2025 Blog de Métodos Numéricos.</p>
+</footer>
+
+</body>
+</html>

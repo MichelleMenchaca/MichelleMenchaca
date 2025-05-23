@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Método de Newton-Raphson - Blog de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+    <h1>Método de Newton-Raphson</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="taylor.html">Serie de Taylor</a>
+    <a href="biseccion.html">Método de Bisección</a>
+    <a href="newton_raphson.html">Newton-Raphson</a>
+</nav>
+
+<main>
+    <h2>Explicación</h2>
+    <p>El método de Newton-Raphson es un método iterativo para aproximar raíces de funciones utilizando la derivada de la función para mejorar la aproximación en cada paso.</p>
+
+    <h2>Resolución paso a paso</h2>
+    <ol>
+        <li>Escoger una aproximación inicial <code>x₀</code>.</li>
+        <li>Calcular la siguiente aproximación: <code>xₙ₊₁ = xₙ - f(xₙ)/f'(xₙ)</code>.</li>
+        <li>Repetir hasta que la diferencia entre aproximaciones sea menor que una tolerancia.</li>
+    </ol>
+
+    <h2>Código Python</h2>
+    <pre><code>def newton_raphson(f, df, x0, tol=1e-6, max_iter=100):
+    x = x0
+    for _ in range(max_iter):
+        fx = f(x)
+        dfx = df(x)
+        if dfx == 0:
+            raise ZeroDivisionError("Derivada cero, no se puede continuar.")
+        x_new = x - fx / dfx
+        if abs(x_new - x) < tol:
+            return x_new
+        x = x_new
+    return x
+
+# Ejemplo
+f = lambda x: x**3 - x - 2
+df = lambda x: 3*x**2 - 1
+raiz = newton_raphson(f, df, 1.5)
+print(f"Raíz aproximada: {raiz}")</code></pre>
+
+    <h2>Bibliografía</h2>
+    <ul>
+        <li>Chapra, Steven C. <em>Métodos numéricos para ingenieros.</em> 7ª edición. McGraw-Hill, 2012.</li>
+        <li>Burden, Richard L., y J. Douglas Faires. <em>Análisis numérico.</em> 9ª edición. Cengage Learning, 2011.</li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2025 Blog de Métodos Numéricos.</p>
+</footer>
+
+</body>
+</html>

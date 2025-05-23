@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Método de la Inversa - Blog de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+    <h1>Método de la Inversa</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="taylor.html">Serie de Taylor</a>
+    <a href="biseccion.html">Método de Bisección</a>
+    <a href="inversa.html">Método de la Inversa</a>
+</nav>
+
+<main>
+    <h2>Explicación</h2>
+    <p>El método de la inversa resuelve sistemas de ecuaciones lineales calculando la inversa de la matriz de coeficientes y multiplicándola por el vector de términos independientes.</p>
+
+    <h2>Resolución paso a paso</h2>
+    <ol>
+        <li>Calcular la matriz inversa <code>A⁻¹</code> de la matriz de coeficientes <code>A</code>.</li>
+        <li>Multiplicar la inversa por el vector <code>b</code>: <code>x = A⁻¹b</code>.</li>
+    </ol>
+
+    <h2>Código Python</h2>
+    <pre><code>import numpy as np
+
+def metodo_inversa(A, b):
+    A_inv = np.linalg.inv(A)
+    x = A_inv @ b
+    return x
+
+# Ejemplo
+A = np.array([[3,1],[1,2]])
+b = np.array([9,8])
+sol = metodo_inversa(A, b)
+print(f"Solución: {sol}")</code></pre>
+
+    <h2>Bibliografía</h2>
+    <ul>
+        <li>Burden, Richard L., y J. Douglas Faires. <em>Análisis numérico.</em> 9ª edición. Cengage Learning, 2011.</li>
+        <li>Chapra, Steven C. <em>Métodos numéricos para ingenieros.</em> 7ª edición. McGraw-Hill, 2012.</li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2025 Blog de Métodos Numéricos.</p>
+</footer>
+
+</body>
+</html>

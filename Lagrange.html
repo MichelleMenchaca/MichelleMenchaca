@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Interpolación de Lagrange - Blog de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+    <h1>Interpolación de Lagrange</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="lagrange.html">Interpolación Lagrange</a>
+</nav>
+
+<main>
+    <h2>Explicación</h2>
+    <p>El polinomio de interpolación de Lagrange se construye como una suma ponderada de polinomios base que son 1 en un punto dado y 0 en los demás.</p>
+
+    <h2>Resolución paso a paso</h2>
+    <ol>
+        <li>Definir los polinomios base L<sub>i</sub>(x).</li>
+        <li>Multiplicar cada L<sub>i</sub>(x) por el valor y<sub>i</sub> correspondiente.</li>
+        <li>Sumar todos los términos para obtener el polinomio interpolador.</li>
+    </ol>
+
+    <h2>Código Python</h2>
+    <pre><code>import numpy as np
+
+def lagrange_interpolation(x_points, y_points, x):
+    total = 0
+    n = len(x_points)
+    for i in range(n):
+        term = y_points[i]
+        for j in range(n):
+            if j != i:
+                term *= (x - x_points[j]) / (x_points[i] - x_points[j])
+        total += term
+    return total
+
+# Ejemplo
+x_points = np.array([0, 1, 2])
+y_points = np.array([1, 3, 2])
+valor = lagrange_interpolation(x_points, y_points, 1.5)
+print(f"Valor interpolado en 1.5: {valor}")</code></pre>
+
+    <h2>Bibliografía</h2>
+    <ul>
+        <li>Burden, Richard L., y J. Douglas Faires. <em>Análisis numérico.</em> 9ª edición. Cengage Learning, 2011.</li>
+        <li>Chapra, Steven C. <em>Métodos numéricos para ingenieros.</em> 7ª edición. McGraw-Hill, 2012.</li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2025 Blog de Métodos Numéricos.</p>
+</footer>
+
+</body>
+</html>

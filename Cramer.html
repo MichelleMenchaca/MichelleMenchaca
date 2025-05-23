@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Regla de Cramer - Blog de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+    <h1>Regla de Cramer</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="taylor.html">Serie de Taylor</a>
+    <a href="biseccion.html">Método de Bisección</a>
+    <a href="cramer.html">Regla de Cramer</a>
+</nav>
+
+<main>
+    <h2>Explicación</h2>
+    <p>La regla de Cramer utiliza determinantes para resolver sistemas de ecuaciones lineales con el mismo número de ecuaciones y incógnitas.</p>
+
+    <h2>Resolución paso a paso</h2>
+    <ol>
+        <li>Calcular el determinante de la matriz de coeficientes <code>det(A)</code>.</li>
+        <li>Para cada incógnita, reemplazar la columna correspondiente por el vector de términos independientes y calcular su determinante.</li>
+        <li>La solución para cada incógnita es el cociente entre estos determinantes: <code>x_i = det(A_i)/det(A)</code>.</li>
+    </ol>
+
+    <h2>Código Python</h2>
+    <pre><code>import numpy as np
+
+def regla_cramer(A, b):
+    det_A = np.linalg.det(A)
+    if det_A == 0:
+        raise ValueError("El sistema no tiene solución única")
+    n = len(b)
+    x = np.zeros(n)
+    for i in range(n):
+        A_i = A.copy()
+        A_i[:, i] = b
+        x[i] = np.linalg.det(A_i) / det_A
+    return x
+
+# Ejemplo
+A = np.array([[2, -1, 3], [1, 0, -2], [3, 1, 1]])
+b = np.array([5, -1, 4])
+sol = regla_cramer(A, b)
+print(f"Solución: {sol}")</code></pre>
+
+    <h2>Bibliografía</h2>
+    <ul>
+        <li>Burden, Richard L., y J. Douglas Faires. <em>Análisis numérico.</em> 9ª edición. Cengage Learning, 2011.</li>
+        <li>Chapra, Steven C. <em>Métodos numéricos para ingenieros.</em> 7ª edición. McGraw-Hill, 2012.</li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2025 Blog de Métodos Numéricos.</p>
+</footer>
+
+</body>
+</html>

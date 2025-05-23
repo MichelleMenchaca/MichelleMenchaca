@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aproximación por mínimos cuadrados - Blog de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+    <h1>Aproximación por mínimos cuadrados</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="minimos_cuadrados.html">Mínimos cuadrados</a>
+</nav>
+
+<main>
+    <h2>Explicación</h2>
+    <p>La aproximación por mínimos cuadrados busca encontrar la curva que mejor se ajusta a un conjunto de datos minimizando la suma de los cuadrados de las diferencias entre los valores observados y los valores estimados.</p>
+
+    <h2>Resolución paso a paso</h2>
+    <ol>
+        <li>Formar el sistema normal <code>AᵀA x = Aᵀb</code>.</li>
+        <li>Resolver el sistema para obtener los coeficientes del polinomio de ajuste.</li>
+        <li>Evaluar o usar el polinomio para predecir valores.</li>
+    </ol>
+
+    <h2>Código Python</h2>
+    <pre><code>import numpy as np
+
+def minimos_cuadrados(x_points, y_points, grado):
+    A = np.vander(x_points, grado + 1)
+    coef = np.linalg.lstsq(A, y_points, rcond=None)[0]
+    return coef
+
+# Ejemplo
+x_points = np.array([0, 1, 2, 3])
+y_points = np.array([1, 2, 1.3, 3.75])
+coeficientes = minimos_cuadrados(x_points, y_points, grado=2)
+print(f"Coeficientes del polinomio: {coeficientes}")</code></pre>
+
+    <h2>Bibliografía</h2>
+    <ul>
+        <li>Burden, Richard L., y J. Douglas Faires. <em>Análisis numérico.</em> 9ª edición. Cengage Learning, 2011.</li>
+        <li>Chapra, Steven C. <em>Métodos numéricos para ingenieros.</em> 7ª edición. McGraw-Hill, 2012.</li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2025 Blog de Métodos Numéricos.</p>
+</footer>
+
+</body>
+</html>

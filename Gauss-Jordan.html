@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Método de Gauss-Jordan - Blog de Métodos Numéricos</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header>
+    <h1>Método de Gauss-Jordan</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="taylor.html">Serie de Taylor</a>
+    <a href="biseccion.html">Método de Bisección</a>
+    <a href="gauss_jordan.html">Gauss-Jordan</a>
+</nav>
+
+<main>
+    <h2>Explicación</h2>
+    <p>El método de Gauss-Jordan extiende la eliminación gaussiana para reducir la matriz aumentada a la forma reducida por filas (matriz identidad), facilitando la solución directa del sistema.</p>
+
+    <h2>Resolución paso a paso</h2>
+    <ol>
+        <li>Formar la matriz aumentada <code>[A|b]</code>.</li>
+        <li>Usar operaciones fila para obtener la matriz identidad en la parte izquierda.</li>
+        <li>La solución está entonces en la parte derecha de la matriz aumentada.</li>
+    </ol>
+
+    <h2>Código Python</h2>
+    <pre><code>import numpy as np
+
+def gauss_jordan(A, b):
+    n = len(b)
+    M = np.hstack([A.astype(float), b.reshape(-1,1)])
+    for i in range(n):
+        # Normalizar fila i
+        M[i] = M[i] / M[i,i]
+        # Eliminar otras filas
+        for j in range(n):
+            if j != i:
+                M[j] = M[j] - M[j,i] * M[i]
+    return M[:, -1]
+
+# Ejemplo
+A = np.array([[2,1,-1],[-3,-1,2],[-2,1,2]])
+b = np.array([8,-11,-3])
+sol = gauss_jordan(A, b)
+print(f"Solución: {sol}")</code></pre>
+
+    <h2>Bibliografía</h2>
+    <ul>
+        <li>Burden, Richard L., y J. Douglas Faires. <em>Análisis numérico.</em> 9ª edición. Cengage Learning, 2011.</li>
+        <li>Chapra, Steven C. <em>Métodos numéricos para ingenieros.</em> 7ª edición. McGraw-Hill, 2012.</li>
+    </ul>
+</main>
+
+<footer>
+    <p>© 2025 Blog de Métodos Numéricos.</p>
+</footer>
+
+</body>
+</html>
